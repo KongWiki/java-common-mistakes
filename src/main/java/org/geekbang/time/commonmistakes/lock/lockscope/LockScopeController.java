@@ -30,8 +30,8 @@ public class LockScopeController {
     @GetMapping("wrong2")
     public String wrong2() {
         Interesting interesting = new Interesting();
-        new Thread(() -> interesting.add()).start();
-        new Thread(() -> interesting.compare()).start();
+        new Thread(interesting::add).start();
+        new Thread(interesting::compare).start();
         return "OK";
     }
 
