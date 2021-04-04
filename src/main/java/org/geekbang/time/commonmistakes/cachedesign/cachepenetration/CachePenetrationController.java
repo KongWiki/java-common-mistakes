@@ -83,4 +83,12 @@ public class CachePenetrationController {
         if (id > 0 && id <= 10000) return "userdata";
         return "";
     }
+
+    public void age(int age) {
+        return;
+    }
+
+    public void age(Integer age){
+        return;
+    }
 }

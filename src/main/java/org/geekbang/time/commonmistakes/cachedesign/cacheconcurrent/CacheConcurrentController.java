@@ -53,7 +53,9 @@ public class CacheConcurrentController {
             if (locker.tryLock()) {
                 try {
                     data = stringRedisTemplate.opsForValue().get("hotsopt");
+                    //双重检查，因为可能已经有一个B线程过了第一次判断，在等锁，然后A线程已经把数据写入了Redis中
                     if (StringUtils.isEmpty(data)) {
+                        //回源到数据库查询
                         data = getExpensiveData();
                         stringRedisTemplate.opsForValue().set("hotsopt", data, 5, TimeUnit.SECONDS);
                     }
